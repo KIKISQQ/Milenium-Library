@@ -81,7 +81,8 @@ getgenv().loaded = true
         config_flags = {},
         connections = {},   
         notifications = {notifs = {}},
-        current_open; 
+        active_toggles = {},
+        current_open;,
     }
 
     local themes = {
@@ -460,6 +461,10 @@ getgenv().loaded = true
                 end 
             end 
             themes.preset[theme] = color 
+
+            for _, refresh in library.active_toggles do
+                pcall(refresh)
+            end
         end
 
         function library:connection(signal, callback)
@@ -506,7 +511,7 @@ getgenv().loaded = true
                 connection:Disconnect() 
                 connection = nil 
             end
-            
+            library.active_toggles = {}
             library = nil 
         end 
     --
@@ -1685,6 +1690,12 @@ getgenv().loaded = true
             end
 
             cfg.set(cfg.default)
+
+            insert(library.active_toggles, function()
+                if cfg.enabled then
+                    cfg.set(true)
+                end
+            end)
 
             config_flags[cfg.flag] = cfg.set
 
