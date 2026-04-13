@@ -818,7 +818,7 @@ getgenv().loaded = true
                         Size = dim2(0, 22, 0, 22);
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(255, 255, 255)
-                    }); library:apply_theme(items[ "icon" ], "accent", "ImageColor3");
+                    });
                     
                     items[ "name" ] = library:create( "TextLabel" , {
                         FontFace = fonts.font;
@@ -4307,4 +4307,3 @@ getgenv().loaded = true
         getgenv().library.themes = themes 
     --
 -- 
-
