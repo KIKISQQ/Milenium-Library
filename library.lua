@@ -1,7 +1,7 @@
 --[[
     Milenium Library
     -> Originally made by @finobe
-    -> Modified by KIKISQ — fixed config saving/loading and misc improvements
+    -> Modified by KIKISQ — fixed config saving/loading, accent theme bugs and misc improvements
 ]]
 
 if getgenv().loaded then 
@@ -448,18 +448,15 @@ getgenv().loaded = true
             insert(themes.utility[theme][property], instance)
         end
 
+
         function library:update_theme(theme, color)
             for _, property in themes.utility[theme] do 
-
                 for m, object in property do 
-                    if object[_] == themes.preset[theme] then 
-                        object[_] = color 
-                    end 
+                    object[_] = color 
                 end 
             end 
-
             themes.preset[theme] = color 
-        end 
+        end
 
         function library:connection(signal, callback)
             local connection = signal:Connect(callback)
@@ -3578,7 +3575,7 @@ getgenv().loaded = true
             section:button({name = "Save", callback = function() writefile(library.directory .. "/configs/" .. flags["config_name_text"] .. ".cfg", library:get_config()) library:update_config_list() notifications:create_notification({name = "Configs", info = "Saved config to:\n" .. flags["config_name_text"] or flags["config_name_text"]}) end}) 
             section:button({name = "Load", callback = function() library:load_config(readfile(library.directory .. "/configs/" .. flags["config_name_text"] .. ".cfg"))  library:update_config_list() notifications:create_notification({name = "Configs", info = "Loaded config:\n" .. flags["config_name_text"]}) end})
             section:button({name = "Delete", callback = function() delfile(library.directory .. "/configs/" .. flags["config_name_text"] .. ".cfg")  library:update_config_list() notifications:create_notification({name = "Configs", info = "Deleted config:\n" .. flags["config_name_text"]}) end})
-            section:colorpicker({name = "Menu Accent", callback = function(color, alpha) library:update_theme("accent", color) end, color = themes.preset.accent})
+            section:colorpicker({name = "Menu Accent", flag = "menu_accent", callback = function(color, alpha) library:update_theme("accent", color) end, color = themes.preset.accent})
             section:keybind({name = "Menu Bind", callback = function(bool) window.toggle_menu(bool) end, default = true})
         end
         
