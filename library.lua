@@ -4303,6 +4303,7 @@ getgenv().loaded = true
                 items[ "notification" ]:Destroy() 
             end)
         end
+        getgenv().library.themes = themes 
     --
 -- 
 
