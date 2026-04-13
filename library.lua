@@ -164,9 +164,9 @@ getgenv().loaded = true
     local config_flags = library.config_flags
     local notifications = library.notifications 
 
-    flags["Name_Color"] = {Color = rgb(255, 255, 255)} 
-    flags["Distance_Color"] = {Color = rgb(255, 255, 255)}
-    flags["Weapon_Color"] = {Color = rgb(255, 255, 255)}
+    flags["Name_Color"] = {Color = rgb(255, 255, 255), Transparency = 0} 
+    flags["Distance_Color"] = {Color = rgb(255, 255, 255), Transparency = 0}
+    flags["Weapon_Color"] = {Color = rgb(255, 255, 255), Transparency = 0}
 
     local fonts = {}; do
         function Register_Font(Name, Weight, Style, Asset)
@@ -1525,122 +1525,121 @@ getgenv().loaded = true
                 });
                 
                 -- Toggle
-                    if cfg.type == "checkbox" then 
-                        items[ "toggle_button" ] = library:create( "TextButton" , {
-                            FontFace = fonts.small;
-                            TextColor3 = rgb(0, 0, 0);
-                            BorderColor3 = rgb(0, 0, 0);
-                            Text = "";
-                            LayoutOrder = 2;
-                            AutoButtonColor = false;
-                            AnchorPoint = vec2(1, 0);
-                            Parent = items[ "right_components" ];
-                            Name = "\0";
-                            Position = dim2(1, 0, 0, 0);
-                            Size = dim2(0, 16, 0, 16);
-                            BorderSizePixel = 0;
-                            TextSize = 14;
-                            BackgroundColor3 = rgb(67, 67, 68)
-                        }); library:apply_theme(items[ "toggle_button" ], "accent", "BackgroundColor3");
-                        
-                        library:create( "UICorner" , {
-                            Parent = items[ "toggle_button" ];
-                            CornerRadius = dim(0, 4)
-                        });
-                        
-                        items[ "outline" ] = library:create( "Frame" , {
-                            Parent = items[ "toggle_button" ];
-                            Size = dim2(1, -2, 1, -2);
-                            Name = "\0";
-                            BorderMode = Enum.BorderMode.Inset;
-                            BorderColor3 = rgb(0, 0, 0);
-                            Position = dim2(0, 1, 0, 1);
-                            BorderSizePixel = 0;
-                            BackgroundColor3 = rgb(22, 22, 24)
-                        }); library:apply_theme(items[ "outline" ], "accent", "BackgroundColor3");
+                 if cfg.type == "checkbox" then 
+                    items[ "toggle_button" ] = library:create( "TextButton" , {
+                        FontFace = fonts.small;
+                        TextColor3 = rgb(0, 0, 0);
+                        BorderColor3 = rgb(0, 0, 0);
+                        Text = "";
+                        LayoutOrder = 2;
+                        AutoButtonColor = false;
+                        AnchorPoint = vec2(1, 0);
+                        Parent = items[ "right_components" ];
+                        Name = "\0";
+                        Position = dim2(1, 0, 0, 0);
+                        Size = dim2(0, 16, 0, 16);
+                        BorderSizePixel = 0;
+                        TextSize = 14;
+                        BackgroundColor3 = rgb(67, 67, 68)
+                    });
+                    
+                    library:create( "UICorner" , {
+                        Parent = items[ "toggle_button" ];
+                        CornerRadius = dim(0, 4)
+                    });
+                    
+                    items[ "outline" ] = library:create( "Frame" , {
+                        Parent = items[ "toggle_button" ];
+                        Size = dim2(1, -2, 1, -2);
+                        Name = "\0";
+                        BorderMode = Enum.BorderMode.Inset;
+                        BorderColor3 = rgb(0, 0, 0);
+                        Position = dim2(0, 1, 0, 1);
+                        BorderSizePixel = 0;
+                        BackgroundColor3 = rgb(22, 22, 24)
+                    });
 
-                        items[ "tick" ] = library:create( "ImageLabel" , {
-                            ImageTransparency = 1;
-                            BorderColor3 = rgb(0, 0, 0);
-                            Image = "rbxassetid://111862698467575";
-                            BackgroundTransparency = 1;
-                            Position = dim2(0, -1, 0, 0);
-                            Parent = items[ "outline" ];
-                            Size = dim2(1, 2, 1, 2);
-                            BorderSizePixel = 0;
-                            BackgroundColor3 = rgb(255, 255, 255);
-                            ZIndex = 1;
-                        });
+                    items[ "tick" ] = library:create( "ImageLabel" , {
+                        ImageTransparency = 1;
+                        BorderColor3 = rgb(0, 0, 0);
+                        Image = "rbxassetid://111862698467575";
+                        BackgroundTransparency = 1;
+                        Position = dim2(0, -1, 0, 0);
+                        Parent = items[ "outline" ];
+                        Size = dim2(1, 2, 1, 2);
+                        BorderSizePixel = 0;
+                        BackgroundColor3 = rgb(255, 255, 255);
+                        ZIndex = 1;
+                    });
 
-                        library:create( "UICorner" , {
-                            Parent = items[ "outline" ];
-                            CornerRadius = dim(0, 4)
-                        });
-                        
-                        library:create( "UIGradient" , {
-                            Enabled = false;
-                            Parent = items[ "outline" ];
-                            Color = rgbseq{rgbkey(0, rgb(211, 211, 211)), rgbkey(1, rgb(211, 211, 211))}
-                        });  
-                    else 
-                        items[ "toggle_button" ] = library:create( "TextButton" , {
-                            FontFace = fonts.font;
-                            TextColor3 = rgb(0, 0, 0);
-                            BorderColor3 = rgb(0, 0, 0);
-                            Text = "";
-                            LayoutOrder = 2;
-                            AnchorPoint = vec2(1, 0.5);
-                            Parent = items[ "right_components" ];
-                            Name = "\0";
-                            Position = dim2(1, -9, 0.5, 0);
-                            Size = dim2(0, 36, 0, 18);
-                            BorderSizePixel = 0;
-                            TextSize = 14;
-                            BackgroundColor3 = themes.preset.accent
-                        }); library:apply_theme(items[ "toggle_button" ], "accent", "BackgroundColor3");
-                        
-                        library:create( "UICorner" , {
-                            Parent = items[ "toggle_button" ];
-                            CornerRadius = dim(0, 999)
-                        });
-                        
-                        items[ "inline" ] = library:create( "Frame" , {
-                            Parent = items[ "toggle_button" ];
-                            Size = dim2(1, -2, 1, -2);
-                            Name = "\0";
-                            BorderMode = Enum.BorderMode.Inset;
-                            BorderColor3 = rgb(0, 0, 0);
-                            Position = dim2(0, 1, 0, 1);
-                            BorderSizePixel = 0;
-                            BackgroundColor3 = themes.preset.accent
-                        }); library:apply_theme(items[ "inline" ], "accent", "BackgroundColor3");
-                        
-                        library:create( "UICorner" , {
-                            Parent = items[ "inline" ];
-                            CornerRadius = dim(0, 999)
-                        });
-                        
-                        library:create( "UIGradient" , {
-                            Color = rgbseq{rgbkey(0, rgb(211, 211, 211)), rgbkey(1, rgb(211, 211, 211))};
-                            Parent = items[ "inline" ]
-                        });
-                        
-                        items[ "circle" ] = library:create( "Frame" , {
-                            Parent = items[ "inline" ];
-                            Name = "\0";
-                            Position = dim2(1, -14, 0, 2);
-                            BorderColor3 = rgb(0, 0, 0);
-                            Size = dim2(0, 12, 0, 12);
-                            BorderSizePixel = 0;
-                            BackgroundColor3 = rgb(255, 255, 255)
-                        });
-                        
-                        library:create( "UICorner" , {
-                            Parent = items[ "circle" ];
-                            CornerRadius = dim(0, 999)
-                        });                        
-                    end 
-                --                
+                    library:create( "UICorner" , {
+                        Parent = items[ "outline" ];
+                        CornerRadius = dim(0, 4)
+                    });
+                    
+                    library:create( "UIGradient" , {
+                        Enabled = false;
+                        Parent = items[ "outline" ];
+                        Color = rgbseq{rgbkey(0, rgb(211, 211, 211)), rgbkey(1, rgb(211, 211, 211))}
+                    });  
+                else 
+                    items[ "toggle_button" ] = library:create( "TextButton" , {
+                        FontFace = fonts.font;
+                        TextColor3 = rgb(0, 0, 0);
+                        BorderColor3 = rgb(0, 0, 0);
+                        Text = "";
+                        LayoutOrder = 2;
+                        AnchorPoint = vec2(1, 0.5);
+                        Parent = items[ "right_components" ];
+                        Name = "\0";
+                        Position = dim2(1, -9, 0.5, 0);
+                        Size = dim2(0, 36, 0, 18);
+                        BorderSizePixel = 0;
+                        TextSize = 14;
+                        BackgroundColor3 = themes.preset.accent
+                    });
+                    
+                    library:create( "UICorner" , {
+                        Parent = items[ "toggle_button" ];
+                        CornerRadius = dim(0, 999)
+                    });
+                    
+                    items[ "inline" ] = library:create( "Frame" , {
+                        Parent = items[ "toggle_button" ];
+                        Size = dim2(1, -2, 1, -2);
+                        Name = "\0";
+                        BorderMode = Enum.BorderMode.Inset;
+                        BorderColor3 = rgb(0, 0, 0);
+                        Position = dim2(0, 1, 0, 1);
+                        BorderSizePixel = 0;
+                        BackgroundColor3 = themes.preset.accent
+                    });
+                    
+                    library:create( "UICorner" , {
+                        Parent = items[ "inline" ];
+                        CornerRadius = dim(0, 999)
+                    });
+                    
+                    library:create( "UIGradient" , {
+                        Color = rgbseq{rgbkey(0, rgb(211, 211, 211)), rgbkey(1, rgb(211, 211, 211))};
+                        Parent = items[ "inline" ]
+                    });
+                    
+                    items[ "circle" ] = library:create( "Frame" , {
+                        Parent = items[ "inline" ];
+                        Name = "\0";
+                        Position = dim2(1, -14, 0, 2);
+                        BorderColor3 = rgb(0, 0, 0);
+                        Size = dim2(0, 12, 0, 12);
+                        BorderSizePixel = 0;
+                        BackgroundColor3 = rgb(255, 255, 255)
+                    });
+                    
+                    library:create( "UICorner" , {
+                        Parent = items[ "circle" ];
+                        CornerRadius = dim(0, 999)
+                    });                        
+                end         
             end;
             
             function cfg.set(bool)
@@ -4307,3 +4306,4 @@ getgenv().loaded = true
         getgenv().library.themes = themes 
     --
 -- 
+
