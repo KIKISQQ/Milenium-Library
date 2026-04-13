@@ -404,7 +404,7 @@ getgenv().loaded = true
                 if type(v) == "table" and v.key then
                     Config[_] = {active = v.active, mode = v.mode, key = tostring(v.key)}
                 elseif type(v) == "table" and v["Transparency"] ~= nil and v["Color"] ~= nil then
-                    Config[_] = {Transparency = v["Transparency"], Color = v["Color"]:ToHex()}
+                    Config[_] = {Transparency = v["Transparency"], Color = v["Color"] and v["Color"]:ToHex() or "ffffff"}
                 else
                     Config[_] = v
                 end
@@ -416,11 +416,15 @@ getgenv().loaded = true
         function library:load_config(config_json) 
             local config = http_service:JSONDecode(config_json)
             
-            for _, v in config do 
-                if type(v) == "table" and v["Transparency"] and v["Color"] then
+                for _, v in config do 
+                if type(v) == "table" and v["Transparency"] ~= nil and v["Color"] ~= nil then
                     local function_set = library.config_flags[_]
                     if function_set then
-                        function_set(hex(v["Color"]), v["Transparency"])
+                        -- v["Color"]
+                        local ok, col = pcall(hex, v["Color"] or "ffffff")
+                        if ok then
+                            function_set(col, v["Transparency"])
+                        end
                     end
                 end
             end
