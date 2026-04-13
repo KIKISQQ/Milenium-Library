@@ -82,7 +82,7 @@ getgenv().loaded = true
         connections = {},   
         notifications = {notifs = {}},
         active_toggles = {},
-        current_open;,
+        current_open,
     }
 
     local themes = {
