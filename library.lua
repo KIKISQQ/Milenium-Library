@@ -2149,7 +2149,7 @@ getgenv().loaded = true
                     TextSize = 14;
                     BackgroundColor3 = rgb(255, 255, 255);
                     ZIndex = 10;
-                }); library:apply_theme(button, "accent", "TextColor3");
+                });
                 
                 library:create( "UIPadding" , {
                     Parent = button;
